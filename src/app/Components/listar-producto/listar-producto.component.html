@@ -1,0 +1,57 @@
+<div class="container mt-5">
+  <div class="container">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card">
+        <div class="card-body  text-center">
+          <span class="titulo"> Listado de producto</span>
+          <button class="btn btn-success float-end" routerLink="crear-producto"> Nuevo</button>
+          <table *ngIf= "listProductos.length > 0" class="table table-striped-columns mt-3">
+            <thead>
+              <tr >
+                <th scope="col">Producto</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">UBICACION</th>
+                <th scope="col">PRECIO</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let producto of listProductos">
+                <td>{{producto.nombre}}</td>
+                <td>{{producto.categoria}}</td>
+                <td>{{producto.ubicacion}}</td>
+                <td>{{producto.precio | currency: 'USD'}}</td>
+                <td>
+             
+                  <i   (click)="eliminarProducto(producto.id)" class="fa-solid fa-trash text-danger"></i>
+                  <i [routerLink]="['/editar-producto' , producto.id]" class="fa-solid fa-pen-to-square text-primary"></i>
+                </td>
+              </tr>
+
+
+            </tbody>
+          </table>
+          <h5  style="text-align: start;  margin-top: 10px;" *ngIf= "listProductos.length == 0">no hay productos para mostrar </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    This is example from ItSolutionStuff.com
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+
+    <button type="button" class="btn btn-outline-dark" (click)="modal.save('Save click')">Ok</button>
+  </div>
+</ng-template>
